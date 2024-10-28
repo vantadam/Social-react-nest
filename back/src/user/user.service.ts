@@ -28,4 +28,37 @@ export class UserService {
     }
     return null;
   }
+
+  async updateUser(id: number, updateData: Partial<{ email: string; password: string; username: string; image: string }>): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { id } });
+    if (!user) {
+      throw new Error('User not found');
+    }
+    if (updateData.email) {
+      user.email = updateData.email;
+    }
+    if (updateData.password) {
+      user.password = await bcrypt.hash(updateData.password, 10);
+    }
+    if (updateData.username) {
+      user.username = updateData.username;
+    }
+    if (updateData.image) {
+      user.image = updateData.image;
+    }
+    return this.userRepository.save(user);
+  }
+
+  async findById(id: number): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { id } });
+    if (user) {
+      delete user.password;
+    }
+
+    return user;
+  }
+  
+  
+
+  
 }

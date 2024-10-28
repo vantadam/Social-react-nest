@@ -11,12 +11,16 @@ export class PostService {
   ) {}
 
   async createPost(title: string, content: string, authorId: number): Promise<Post> {
-    const post = this.postRepository.create({ title, content, authorId });
+    const post = this.postRepository.create({content, authorId });
     return this.postRepository.save(post);
   }
 
   async findAll(): Promise<Post[]> {
-    return this.postRepository.find();
+    return this.postRepository.find({
+      order: {
+        createdAt: 'DESC',
+      },
+    });
   }
 
   async findOne(id: number): Promise<Post> {
@@ -29,7 +33,7 @@ export class PostService {
 
   async updatePost(id: number, title: string, content: string): Promise<Post> {
     const post = await this.findOne(id);
-    post.title = title;
+    
     post.content = content;
     return this.postRepository.save(post);
   }
