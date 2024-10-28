@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom"; 
 import "./auth.css"; 
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate(); // Initialize the navigate hook
+  const navigate = useNavigate(); 
 
   const formik = useFormik({
     initialValues: {
