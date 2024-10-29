@@ -1,4 +1,4 @@
-/* General post styling */
+
 .post {
     background: #ffffff;
     border: 1px solid #e0e0e0;
@@ -6,9 +6,9 @@
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
-    max-width: 800px; /* Increased max width for a wider layout */
+    max-width: 800px; 
     margin: 20px auto;
-    width: 90%; /* Ensures responsiveness, filling 90% of the viewport */
+    width: 90%; 
 }
 
 .post:hover {
@@ -16,14 +16,14 @@
     transform: translateY(-4px);
 }
 
-/* Header styling */
+
 .post-header {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
 }
 
-/* Author info styling */
+
 .post-author-info {
     display: flex;
     align-items: center;
@@ -38,7 +38,7 @@
     border: 2px solid #007bff;
 }
 
-/* Author details */
+
 .post-author-details {
     display: flex;
     flex-direction: column;
