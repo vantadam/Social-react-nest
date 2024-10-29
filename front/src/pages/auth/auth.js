@@ -1,11 +1,17 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { NavLink, Outlet } from "react-router-dom";
 import "./auth.css";
 import logo from "./../../res/img/logo.png";
 
 const Auth = () => {
+
+  
   return (
     <div className="authpage">
+      <Helmet>
+      <title>Auth</title>
+    </Helmet>
     <div className="auth-container">
       <nav>
         <ul className="nav-list">

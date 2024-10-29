@@ -17,7 +17,8 @@ export class User {
   @IsNotEmpty()
   password: string;
 
-  @Column()
-  image: string;
+  @Column({ nullable: true })
+image: string;
+
 
 }

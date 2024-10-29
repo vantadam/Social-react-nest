@@ -28,6 +28,7 @@ const ProtectedRoutes = () => {
   return (
     <div>
       <button onClick={handleLogout} className="logout-button">Logout</button>
+      <button onClick={() => navigate('/profile')} className="profile-button">Profile</button>
       
       <Outlet />
     </div>

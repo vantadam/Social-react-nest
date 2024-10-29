@@ -15,3 +15,20 @@
 .logout-button:hover {
   background-color: #c9302c;
 }
+.profile-button {
+  position: absolute;
+  top: 20px;
+  right: 100px;
+  padding: 10px 15px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #5bc0de;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.profile-button:hover {
+  background-color: #31b0d5;
+}

@@ -47,7 +47,8 @@ export class UserService {
       user.image = updateData.image;
     }
     return this.userRepository.save(user);
-  }
+}
+
 
   async findById(id: number): Promise<User> {
     const user = await this.userRepository.findOne({ where: { id } });

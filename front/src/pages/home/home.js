@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Post from '../../components/post/post';
+import { Helmet } from 'react-helmet';
 import './home.css';
 
 const Home = () => {
@@ -30,6 +31,7 @@ const Home = () => {
             return {
               ...post,
               authorUsername: authorResponse.data.username,
+              profilePic: authorResponse.data.image,
             };
           })
         );
@@ -72,6 +74,7 @@ const Home = () => {
       const newPost = {
         ...response.data,
         authorUsername: authorResponse.data.username,
+        profilePic: authorResponse.data.image,
         createdAt: new Date().toISOString(),
       };
 
@@ -83,12 +86,18 @@ const Home = () => {
   };
 
   if (loading) {
-    return <div className="loading">Loading...</div>;
+    return <div className="loading">
+      <Helmet>
+      <title>Loading</title>
+    </Helmet>
+      Loading...</div>;
   }
 
   return (
     <div className="home-container">
-     
+     <Helmet>
+      <title>Home</title>
+    </Helmet>
       <div className="new-post">
         <textarea
           value={newPostContent}
@@ -108,6 +117,8 @@ const Home = () => {
             username={post.authorUsername}
             content={post.content}
             createdAt={post.createdAt}
+            profilePic={post.profilePic}
+
           />
         ))}
       </div>

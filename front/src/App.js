@@ -6,6 +6,7 @@ import Register from './pages/auth/register';
 import './App.css';
 import ProtectedRoutes from './ProtectedRoutes';
 import Home from './pages/home/home';
+import Profile from './pages/profile/profile';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           </Route>
           <Route element={<ProtectedRoutes/>}>
             <Route path="/" element={<Home/>} />
+            <Route path="/profile" element={<Profile/>} />
           </Route>
         </Routes>
       </BrowserRouter>
