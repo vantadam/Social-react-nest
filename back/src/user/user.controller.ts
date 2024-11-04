@@ -9,7 +9,8 @@ import {
     UseInterceptors, 
     Post, 
     HttpException, 
-    HttpStatus 
+    HttpStatus ,
+    Query
   } from '@nestjs/common';
   import { FileInterceptor } from '@nestjs/platform-express';
   import { diskStorage } from 'multer';
@@ -70,6 +71,11 @@ import {
     @Get('username/:username')
   async getUserByUsername(@Param('username') username: string) {
     return this.userService.findByUsername(username);
+  }
+
+  @Get('search/:name')
+  async searchUsers(@Param('name') name: string): Promise<User[]> {
+    return this.userService.searchUsersByName(name);
   }
   }
   

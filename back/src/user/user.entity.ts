@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { IsEmail, IsNotEmpty } from 'class-validator';
+import { Follow } from 'src/follow/follow.entity';
 
 @Entity()
 export class User {
@@ -20,5 +21,10 @@ export class User {
   @Column({ nullable: true })
 image: string;
 
+@OneToMany(() => Follow, follow => follow.follower)
+  following: Follow[];
+
+  @OneToMany(() => Follow, follow => follow.following)
+  followers: Follow[];
 
 }

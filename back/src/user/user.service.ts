@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository ,ILike} from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { User } from './user.entity';
 
@@ -64,6 +64,28 @@ export class UserService {
     }
 
     return user;
+  }
+
+  async searchUsersByName(name: string): Promise<User[]> {
+
+    const exactMatches = await this.userRepository.find({
+      where: { username: ILike(`${name}%`) },
+      select: ['id', 'username', 'image'],
+    });
+
+   
+    const partialMatches = await this.userRepository.find({
+      where: { username: ILike(`%${name}%`) },
+      select: ['id', 'username', 'image'],
+    });
+
+
+    const uniquePartialMatches = partialMatches.filter(
+      partial => !exactMatches.find(exact => exact.id === partial.id)
+    );
+
+
+    return [...exactMatches, ...uniquePartialMatches];
   }
   
   

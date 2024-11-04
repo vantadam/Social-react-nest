@@ -32,7 +32,7 @@ const Post = ({ username, content, createdAt, profilePic, authorId }) => {
             <div className="post-header">
                 <div className="post-author-info" onClick={handleUserClick} style={{ cursor: 'pointer' }}>
                     <img 
-                        className='profile-pic' 
+                        className='post-profile-pic' 
                         src={profilePic ? `http://localhost:3500/uploads/profilepics/${profilePic}` : userdefault} 
                         alt="Profile" 
                     />

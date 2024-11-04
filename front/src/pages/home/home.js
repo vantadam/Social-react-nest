@@ -15,7 +15,7 @@ const Home = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('http://localhost:3500/posts', {
+        const response = await axios.get(`http://localhost:3500/posts/feed/${userId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

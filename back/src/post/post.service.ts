@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository,In } from 'typeorm';
 import { Post } from './post.entity';
 
 @Injectable()
@@ -50,6 +50,12 @@ export class PostService {
       order: {
         createdAt: 'DESC',
       },
+    });
+  }
+  async getPostsByAuthors(authorIds: number[]): Promise<Post[]> {
+    return this.postRepository.find({
+      where: { authorId: In(authorIds) },
+      order: { createdAt: 'DESC' }, 
     });
   }
   

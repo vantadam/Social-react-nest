@@ -6,6 +6,7 @@ import "./rightbar.css";
 import userdefault from "../../res/img/user.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
+import SearchBar from "../searchbar/searchbar";
 
 
 const Rightbar = () => {
@@ -36,6 +37,9 @@ const Rightbar = () => {
         <div className="icon">
         <FontAwesomeIcon icon={faCog} />
         </div>
+        </div>
+      <div className="searchbar">
+        <SearchBar />
         </div>
        
     </div>
