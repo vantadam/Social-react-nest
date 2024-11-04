@@ -3,6 +3,8 @@ import React from 'react';
 import { Outlet, Navigate,useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode'; 
 import './App.css';
+import Leftbar from './components/leftbar/leftbar';
+import Rightbar from './components/rightbar/rightbar';
 
 const ProtectedRoutes = () => {
   const token = localStorage.getItem('token');
@@ -26,11 +28,19 @@ const ProtectedRoutes = () => {
   };
 
   return (
-    <div>
-      <button onClick={handleLogout} className="logout-button">Logout</button>
-      <button onClick={() => navigate('/profile')} className="profile-button">Profile</button>
+    <div className='protected-routes'>
+      <div className='leftbar'>
+      <Leftbar />
+      </div>
       
+     
+      
+      <div className='main'>
       <Outlet />
+      </div>
+      <div className='rightbar'>
+        </div>
+      <Rightbar />
     </div>
   );
 };

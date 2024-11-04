@@ -1,8 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './post.css';
 import userdefault from '../../res/img/user.png';
 
-const Post = ({ username, content, createdAt, profilePic }) => {
+const Post = ({ username, content, createdAt, profilePic, authorId }) => {
+    const navigate = useNavigate();
+
+    const handleUserClick = () => {
+        navigate(`/user/${authorId}`);
+    };
+
     const timeAgo = (createdDate) => {
         const now = Date.now();
         const postDate = new Date(createdDate).getTime();
@@ -23,7 +30,7 @@ const Post = ({ username, content, createdAt, profilePic }) => {
     return (
         <div className="post">
             <div className="post-header">
-                <div className="post-author-info">
+                <div className="post-author-info" onClick={handleUserClick} style={{ cursor: 'pointer' }}>
                     <img 
                         className='profile-pic' 
                         src={profilePic ? `http://localhost:3500/uploads/profilepics/${profilePic}` : userdefault} 

@@ -35,7 +35,7 @@
     border-radius: 50%;
     object-fit: cover;
     margin-right: 12px;
-    border: 2px solid #007bff;
+    border: 2px solid #5046E5;
 }
 
 
@@ -47,7 +47,7 @@
 .post-author {
     font-weight: bold;
     font-size: 1.1em;
-    color: #007bff;
+    color: #5046E5;
     margin: 0;
 }
 

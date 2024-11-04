@@ -36,4 +36,9 @@ export class PostController {
   deletePost(@Param('id') id: number): Promise<void> {
     return this.postService.deletePost(id);
   }
+  @Get('author/:authorId')
+findPostsByAuthor(@Param('authorId') authorId: number): Promise<PostEntity[]> {
+  return this.postService.findPostsByAuthor(authorId);
+}
+
 }

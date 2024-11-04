@@ -9,7 +9,7 @@ const Auth = () => {
   
   return (
     <div className="authpage">
-      <Helmet>
+      <div className="left"> <Helmet>
       <title>Auth</title>
     </Helmet>
     <div className="auth-container">
@@ -43,7 +43,8 @@ const Auth = () => {
         <Outlet />
       </div>
       
-      </div>
+      </div></div>
+     
     <div className="logo"><img src={logo} alt="Logo"/></div>
    
     </div>

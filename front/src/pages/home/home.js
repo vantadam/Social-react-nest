@@ -118,6 +118,7 @@ const Home = () => {
             content={post.content}
             createdAt={post.createdAt}
             profilePic={post.profilePic}
+            authorId={post.authorId}
 
           />
         ))}

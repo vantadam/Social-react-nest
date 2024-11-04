@@ -66,5 +66,10 @@ import {
   
       return { filename };
     }
+
+    @Get('username/:username')
+  async getUserByUsername(@Param('username') username: string) {
+    return this.userService.findByUsername(username);
+  }
   }
   

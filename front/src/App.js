@@ -7,6 +7,7 @@ import './App.css';
 import ProtectedRoutes from './ProtectedRoutes';
 import Home from './pages/home/home';
 import Profile from './pages/profile/profile';
+import User from './pages/user/user';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route element={<ProtectedRoutes/>}>
             <Route path="/" element={<Home/>} />
             <Route path="/profile" element={<Profile/>} />
+            <Route path="/user/:id" element={<User/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

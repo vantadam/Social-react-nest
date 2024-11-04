@@ -44,4 +44,13 @@ export class PostService {
       throw new NotFoundException(`Post with ID ${id} not found`);
     }
   }
+  async findPostsByAuthor(authorId: number): Promise<Post[]> {
+    return this.postRepository.find({
+      where: { authorId },
+      order: {
+        createdAt: 'DESC',
+      },
+    });
+  }
+  
 }
