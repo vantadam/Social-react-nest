@@ -15,9 +15,7 @@ export class FollowService {
   ) {}
 
   async followUser(followerId: number, followingId: number): Promise<Follow> {
-    if (followerId === followingId) {
-      throw new ConflictException("You can't follow yourself");
-    }
+    
 
     const follower = await this.userRepository.findOne({ where: { id: followerId } });
     const following = await this.userRepository.findOne({ where: { id: followingId } });
