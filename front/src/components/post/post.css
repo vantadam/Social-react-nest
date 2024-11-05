@@ -67,3 +67,55 @@
     border-top: 1px solid #eee;
     margin-top: 10px;
 }
+.post-actions {
+    margin-left: auto;
+    display: flex;
+    gap: 8px;
+}
+
+.edit-button,
+.delete-button,
+.save-button,
+.cancel-button {
+    
+    color: #a2a2a2 !important;
+    border: none;
+    background-color: #fff !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    
+    font-size: 0.9em;
+    cursor: pointer;
+   
+}
+
+.edit-button:hover,
+.save-button:hover {
+    color: #3f38c7 !important;
+}
+
+
+
+.delete-button:hover {
+    color: #c0392b !important;
+}
+
+
+
+.cancel-button:hover {
+    color: #666 !important;
+}
+
+.post-content-edit {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    line-height: 1.6;
+    color: #333;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    resize: vertical;
+    margin-top: 10px;
+}

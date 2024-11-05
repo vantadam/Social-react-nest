@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Post from '../../components/post/post';
@@ -7,43 +6,44 @@ import './home.css';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
-  const [newPostContent, setNewPostContent] = useState(''); 
+  const [newPostContent, setNewPostContent] = useState('');
   const [loading, setLoading] = useState(true);
   const token = localStorage.getItem('token');
-  const userId = localStorage.getItem('userId'); 
+  const userId = localStorage.getItem('userId');
+
+  const fetchPosts = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(`http://localhost:3500/posts/feed/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const postsWithAuthors = await Promise.all(
+        response.data.map(async (post) => {
+          const authorResponse = await axios.get(`http://localhost:3500/user/${post.authorId}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          return {
+            ...post,
+            authorUsername: authorResponse.data.username,
+            profilePic: authorResponse.data.image,
+          };
+        })
+      );
+
+      setPosts(postsWithAuthors);
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await axios.get(`http://localhost:3500/posts/feed/${userId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        const postsWithAuthors = await Promise.all(
-          response.data.map(async (post) => {
-            const authorResponse = await axios.get(`http://localhost:3500/user/${post.authorId}`, {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            });
-            return {
-              ...post,
-              authorUsername: authorResponse.data.username,
-              profilePic: authorResponse.data.image,
-            };
-          })
-        );
-
-        setPosts(postsWithAuthors);
-      } catch (error) {
-        console.error('Error fetching posts:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchPosts();
   }, [token]);
 
@@ -70,7 +70,6 @@ const Home = () => {
         },
       });
 
-      
       const newPost = {
         ...response.data,
         authorUsername: authorResponse.data.username,
@@ -79,25 +78,28 @@ const Home = () => {
       };
 
       setPosts([newPost, ...posts]);
-      setNewPostContent(''); 
+      setNewPostContent('');
     } catch (error) {
       console.error('Error creating post:', error);
     }
   };
 
   if (loading) {
-    return <div className="loading">
-      <Helmet>
-      <title>Loading</title>
-    </Helmet>
-      Loading...</div>;
+    return (
+      <div className="loading">
+        <Helmet>
+          <title>Loading</title>
+        </Helmet>
+        Loading...
+      </div>
+    );
   }
 
   return (
     <div className="home-container">
-     <Helmet>
-      <title>Home</title>
-    </Helmet>
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
       <div className="new-post">
         <textarea
           value={newPostContent}
@@ -110,16 +112,16 @@ const Home = () => {
         </button>
       </div>
       <div className="posts-list">
-  
         {posts.map((post) => (
           <Post
             key={post.id}
+            postId={post.id}
             username={post.authorUsername}
             content={post.content}
             createdAt={post.createdAt}
             profilePic={post.profilePic}
             authorId={post.authorId}
-
+            onPostUpdated={fetchPosts} 
           />
         ))}
       </div>

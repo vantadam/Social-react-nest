@@ -13,8 +13,30 @@ const User = () => {
     const [follows, setFollows] = useState(false);
     const userId = localStorage.getItem('userId');
     const [isLoadingFollow, setIsLoadingFollow] = useState(false); 
+    const [user, setUser] = useState({});
+
 
     useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const response = await axios.get(`http://localhost:3500/user/${authorId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                setUser(response.data);
+                const checkFollowResponse = await axios.get(`http://localhost:3500/follow/check/${userId}/${authorId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                setFollows(checkFollowResponse.data); 
+            } catch (error) {
+                console.error('Error fetching user:', error);
+            }
+
+        };
+
         const fetchUserPosts = async () => {
             try {
                 const response = await axios.get(`http://localhost:3500/posts/author/${authorId}`, {
@@ -23,38 +45,17 @@ const User = () => {
                     },
                 });
 
-                const postsWithAuthors = await Promise.all(
-                    response.data.map(async (post) => {
-                        const authorResponse = await axios.get(`http://localhost:3500/user/${post.authorId}`, {
-                            headers: {
-                                Authorization: `Bearer ${token}`,
-                            },
-                        });
-                        return {
-                            ...post,
-                            authorUsername: authorResponse.data.username,
-                            profilePic: authorResponse.data.image,
-                        };
-                    })
-                );
 
-      
-                const checkFollowResponse = await axios.get(`http://localhost:3500/follow/check/${userId}/${authorId}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-                setFollows(checkFollowResponse.data); 
-
-                setPosts(postsWithAuthors);
+                setPosts(response.data);
             } catch (error) {
                 console.error('Error fetching posts:', error);
             } finally {
                 setLoading(false);
             }
         };
-
+        fetchUser();
         fetchUserPosts();
+
     }, [authorId, token, userId]);
 
     const handleFollowToggle = async () => {
@@ -92,28 +93,29 @@ const User = () => {
         <div className="user-page-container">
             <div className='userinfo'>
                 <img 
-                    src={posts[0]?.profilePic ? `http://localhost:3500/uploads/profilepics/${posts[0].profilePic}` : userdefault} 
+                    src={user?.image ? `http://localhost:3500/uploads/profilepics/${user.image}` : userdefault} 
                     alt="Profile" 
                     className='profile-pic' 
                 />
-                <h2>{posts[0]?.authorUsername}</h2>
-                <button 
+                <h2>{user.username}</h2>
+               {userId!=authorId ?  <button 
                     className={`follow-button ${follows ? 'unfollow' : 'follow'}`} 
                     onClick={handleFollowToggle} 
-                    disabled={isLoadingFollow} // Disable the button while loading
+                    disabled={isLoadingFollow} 
                 >
                     {isLoadingFollow ? (follows ? 'Unfollowing...' : 'Following...') : (follows ? 'Unfollow' : 'Follow')}
-                </button>
+                </button> : null}
+                
             </div>
             <div className="posts-list">
                 {posts.map((post) => (
                     <Post
                         key={post.id}
-                        username={post.authorUsername}
+                        username={user.username}
                         content={post.content}
                         createdAt={post.createdAt}
-                        profilePic={post.profilePic}
-                        authorId={post.authorId}
+                        profilePic={user.image}
+                        authorId={authorId}
                     />
                 ))}
             </div>

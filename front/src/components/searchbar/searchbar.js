@@ -43,7 +43,7 @@ const SearchBar = () => {
     const handleBlur = () => {
         setTimeout(() => {
             setShowResults(false);
-        }, 200);
+        }, 400);
       
 
     };
