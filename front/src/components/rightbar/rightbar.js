@@ -7,6 +7,7 @@ import userdefault from "../../res/img/user.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
 import SearchBar from "../searchbar/searchbar";
+import { Link } from "react-router-dom";
 
 
 const Rightbar = () => {
@@ -35,7 +36,8 @@ const Rightbar = () => {
         <img src={user.image ? `http://localhost:3500/uploads/profilepics/${user.image}` : userdefault} alt="Profile" /> {user.username}
         </div>
         <div className="icon">
-        <FontAwesomeIcon icon={faCog} />
+          <Link to={"/profile"}><FontAwesomeIcon icon={faCog} /></Link>
+        
         </div>
         </div>
       <div className="searchbar">

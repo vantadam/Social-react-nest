@@ -31,10 +31,10 @@ const Leftbar = () => {
 
   const pages = [
     { name: "Home", path: "/" , icon: faHome},
-    { name: "Messages", path: "/messages", icon: faEnvelope},
+    
     { name: "Follows", path: "/follows", icon: faUsers },
     { name: "Notifications", path: "/notifications" , icon: faBell},
-    { name: "Profile", path: "/profile", icon: faUser },
+    { name: "Profile", path: `/user/${userId}`, icon: faUser },
   ];
 
   const handleLogout = () => {

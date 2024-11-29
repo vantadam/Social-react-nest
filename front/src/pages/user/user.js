@@ -16,6 +16,7 @@ const User = () => {
     const [user, setUser] = useState({});
 
 
+
     useEffect(() => {
         const fetchUser = async () => {
             try {
@@ -115,7 +116,9 @@ const User = () => {
                         content={post.content}
                         createdAt={post.createdAt}
                         profilePic={user.image}
-                        authorId={authorId}
+                        authorId={post.authorId}
+                        postId={post.id}
+                        
                     />
                 ))}
             </div>

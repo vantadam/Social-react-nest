@@ -9,5 +9,6 @@ import { FollowModule } from '../follow/follow.module';
   imports: [TypeOrmModule.forFeature([Post]), FollowModule],
   providers: [PostService],
   controllers: [PostController],
+  exports: [PostService],
 })
 export class PostModule {}

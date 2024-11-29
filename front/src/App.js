@@ -8,6 +8,8 @@ import ProtectedRoutes from './ProtectedRoutes';
 import Home from './pages/home/home';
 import Profile from './pages/profile/profile';
 import User from './pages/user/user';
+import Follows from './pages/follows/follows';
+import Notifications from './pages/notifications/notifications';
 
 function App() {
   return (
@@ -24,6 +26,9 @@ function App() {
             <Route path="/" element={<Home/>} />
             <Route path="/profile" element={<Profile/>} />
             <Route path="/user/:id" element={<User/>}/>
+            <Route path="/follows" element={<Follows/>}/>
+            <Route path="/notifications" element={<Notifications/>}/>
+
           </Route>
         </Routes>
       </BrowserRouter>
