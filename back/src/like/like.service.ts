@@ -4,12 +4,16 @@ import { Repository } from 'typeorm';
 import { Like } from './like.entity';
 import { User } from '../user/user.entity';
 import { Post } from '../post/post.entity';
+import { NotificationService } from '../notification/notification.service'; 
+import { Inject, forwardRef } from '@nestjs/common';
 
 @Injectable()
 export class LikeService {
   constructor(
     @InjectRepository(Like)
     private readonly likeRepository: Repository<Like>,
+    @Inject(forwardRef(() => NotificationService)) 
+    private readonly notificationService: NotificationService,
   ) {}
 
 
@@ -20,6 +24,14 @@ export class LikeService {
     }
     const like = this.likeRepository.create({ user, post });
     await this.likeRepository.save(like);
+
+    await this.notificationService.createNotification(
+      'like',
+      user.id,
+      post.authorId,
+      post.id,
+    );
+    
 
     return like;
   }

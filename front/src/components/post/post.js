@@ -166,6 +166,7 @@ const Post = ({ postId, username, content, createdAt, profilePic, authorId, onPo
             if (response.ok) {
                 const data = await response.json();
                 setComments(data);
+                console.log(data);
             } else {
                 console.error("Failed to fetch comments");
             }

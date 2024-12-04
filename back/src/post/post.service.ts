@@ -58,5 +58,9 @@ export class PostService {
       order: { createdAt: 'DESC' }, 
     });
   }
+  async findAuthorByPostId(postId: number): Promise<number> {
+    const post = await this.findOne(postId);
+    return post.authorId;
+  }
   
 }

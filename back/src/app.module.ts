@@ -10,6 +10,8 @@ import { FollowModule } from './follow/follow.module';
 import { LikeModule } from './like/like.module';
 import { CommentModule } from './comment/comment.module';  
 
+import { NotificationModule } from './notification/notification.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -35,6 +37,7 @@ import { CommentModule } from './comment/comment.module';
     FollowModule,
     LikeModule,
     CommentModule,
+    NotificationModule,
   ],
   controllers: [AppController],  // Only AppController here
   providers: [AppService],  // Only AppService here
