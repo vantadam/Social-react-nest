@@ -1,0 +1,36 @@
+.notifications-page {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .notifications-page h1 {
+    text-align: center;
+  }
+  
+ .notifications-page ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+ .notifications-page li {
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+ .notifications-page button {
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+ .notifications-page button:disabled {
+    cursor: not-allowed;
+  }
+
+  
